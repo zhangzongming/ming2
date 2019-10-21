@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-text="lastName+firstName"></p>
+        <p v-text="name2"></p>
+        <p>{{name2}}</p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            // data:{
+            //     name:'123',
+            //     lastName:'zs',
+            //     firstName:'ls'
+            // },
+            computed: {
+                name2() {
+                    return this.lastName + this.firstName
+                },
+                lastName() {
+                    return 'zs'
+                },
+                firstName() {
+                    return 'ls'
+                }
+            },
+            methods: {
+                // name1() {
+                //     return this.firstName + this.lastName
+                // }
+            }
+        })
+    </script>
+</body>
+
+</html>

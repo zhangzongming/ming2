@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>插槽</title>
+</head>
+
+<body>
+    <div id="app">
+        <ming-header></ming-header>
+    </div>
+    <script src="../计算属性/vue.js"></script>
+    <script>
+        Vue.component('ming-header', {
+            data() {
+                return {
+                    name1: 123
+                }
+            },
+            template: `
+            <ming-header><input type="text" :name style="margin:10px;boeder:1px solid #ccc">
+            <input type="text" v-model="name"></ming-header>`
+
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                name: 'yao'
+            },
+            render() {},
+            template: `
+            
+            `,
+            //监听该实例创建前的行为
+            beforeCreate() {
+                console.log('----beforeCreate----')
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+
+            },
+            //创建后 可以检测到Mode层（data）里面的数据
+            created() {
+                console.log('---created---');
+
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+            },
+            //挂载前 dom解构已经挂载好了，数据没有解析渲染出来
+            beforeMount() {
+                console.log('----beforeMount----')
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+            },
+            // 处理模板
+            render(h) {
+                console.log('-------render-------')
+                let vdom2 = h('p', null, this.name)
+                vdom2.tag = 'div'
+                let vdom = h('div', null, [vdom2])
+
+                console.log(vdom, vdom2)
+                return vdom
+            },
+            //挂载后 挂载完毕，V（视图）数据已经渲染出来了
+            mounted() {
+                console.log('----mounted----')
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+            },
+            // 更新前
+            beforeUpdate() {
+                console.log('----beforeUpdate----')
+                console.log(111);
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+            },
+            Updated() {
+                console.log('----Update----')
+                console.log(222);
+                console.log('V', this.$el);
+                console.log('M', this.$data);
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

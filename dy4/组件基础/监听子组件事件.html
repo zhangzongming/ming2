@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        ming
+    </title>
+</head>
+<body>
+    <div id="app">
+    <!-- 自定义一个事件，该事件名ming-text 该事件的方法为fn-->
+        <ming-header v-on:ming-text="fn"></ming-header>
+    </div>
+    <script src="../计算属性/vue.js"></script>
+    <script>
+        Vue.component('ming-header',{
+            data(){
+                return{
+                    num:1
+                }
+            },
+            template:`<header style="margin:20px;border:1px solid blue">
+                <input v-model="num"/>
+                <button @click="$emit('ming-text',num)">ok</button>
+                </header>`
+        })
+
+        new Vue({
+            el:'#app',
+            data:{
+                num:1
+            },
+            methods:{
+                //父组件的事件
+                fn(num){
+                    this.num = num;
+                    console.log(num);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
